@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Lottie from 'react-lottie';
-import { Container, Button } from './styles';
+import { Container, Button, TextAnimation, ImageAnimation } from './styles';
 
 import * as developer from '../../assets/lottie/developer.json';
 import cloudia from '../../assets/images/cloudia.svg';
@@ -18,11 +18,17 @@ export default function Home() {
 
   return (
     <Container>
-      <img height={50} src={cloudia} alt="cloudia" />
-      <h1>FullStack Developer</h1>
+      <ImageAnimation>
+        <img height={50} src={cloudia} alt="cloudia" />
+      </ImageAnimation>
 
+      <TextAnimation>
+        <h1>FullStack Developer</h1>
+      </TextAnimation>
       <Lottie options={defaultOptions} height={400} width={400} />
-      <Button type="button">Go to Clients</Button>
+      <a href="/list">
+        <Button type="button">Go to Clients</Button>
+      </a>
     </Container>
   );
 }

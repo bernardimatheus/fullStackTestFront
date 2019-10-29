@@ -1,7 +1,11 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import { Container } from './styles';
 
 export default function ListClient() {
-  return <h1>List client</h1>;
+  return (
+    <Container>
+      <h1>List</h1>
+    </Container>
+  );
 }
