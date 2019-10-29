@@ -6,6 +6,8 @@ import history from './services/history';
 
 import GlobalStyle from './styles/global';
 
+require('dotenv').config();
+
 function App() {
   return (
     <Router history={history}>
