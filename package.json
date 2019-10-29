@@ -6,6 +6,7 @@
     "history": "^4.10.1",
     "lottie-web": "^5.5.9",
     "react": "^16.11.0",
+    "react-animations": "^1.0.0",
     "react-dom": "^16.11.0",
     "react-lottie": "^1.2.3",
     "react-router-dom": "^5.1.2",

@@ -1,4 +1,9 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+import { fadeInRight, fadeInLeft } from 'react-animations';
+
+const textAnimations = keyframes`${fadeInRight}`;
+const imageAnimations = keyframes`${fadeInLeft}`;
 
 export const Container = styled.div`
   display: flex;
@@ -33,4 +38,12 @@ export const Button = styled.button`
   font-weight: bold;
   background: #5bb5b5;
   border: none;
+`;
+
+export const TextAnimation = styled.div`
+  animation: 1s ${textAnimations};
+`;
+
+export const ImageAnimation = styled.div`
+  animation: 1s ${imageAnimations};
 `;
