@@ -4,7 +4,7 @@ export const Container = styled.div``;
 
 export const AddButton = styled.button`
   background: transparent !important;
-  margin-bottom: -30px;
+  margin-bottom: -10px;
   border: none;
   bottom: -30px;
   z-index: 10;

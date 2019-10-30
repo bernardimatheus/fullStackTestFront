@@ -370,7 +370,7 @@
   margin: 3px 10px;
 }
 .ReactTable .rt-noData {
-  display: block;
+  display: none;
   position: absolute;
   left: 50%;
   top: 50%;
