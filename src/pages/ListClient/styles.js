@@ -17,6 +17,9 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   max-width: 900px;
   margin: 20px;
   padding: 15px;
