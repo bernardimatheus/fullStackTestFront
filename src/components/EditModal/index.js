@@ -4,6 +4,10 @@ import Modal from 'react-modal';
 
 import { Form, Input } from '@rocketseat/unform';
 
+import InputMask from 'react-input-mask';
+
+import { toast } from 'react-toastify';
+
 import { Container } from './styles';
 import api from '../../services/api';
 
@@ -41,6 +45,12 @@ const buttonStyle = {
 
 Modal.setAppElement('#root');
 
+toast.configure({
+  autoClose: 3000,
+  draggable: false,
+  // etc you get the idea
+});
+
 export default function EditModal({ data, handleEdit }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -60,6 +70,7 @@ export default function EditModal({ data, handleEdit }) {
       )
       .then(res => {
         if (res.status === 200) {
+          toast.success('Cliente editado!');
           handleEdit();
         }
       });
@@ -76,16 +87,35 @@ export default function EditModal({ data, handleEdit }) {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <h2>Editar cliente</h2>
+        <h2 style={{ textAlign: 'center', color: '#666' }}>Editar cliente</h2>
         <Form
           initialData={data}
-          style={{ display: 'flex', flexDirection: 'column' }}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '15px',
+          }}
           onSubmit={handleSubmit}
         >
-          <Input style={inputStyle} name="name" />
-          <Input style={inputStyle} name="cpf" />
-          <Input style={inputStyle} name="email" />
-          <Input style={inputStyle} name="phone" />
+          <Input style={inputStyle} required name="name" />
+          <InputMask defaultValue={data.cpf} mask="999.999.999-99">
+            {() => (
+              <Input placeholder="CPF" style={inputStyle} name="cpf" required />
+            )}
+          </InputMask>
+          <Input style={inputStyle} required name="email" />
+          <InputMask defaultValue={data.phone} mask="(99) 9 9999-9999">
+            {() => (
+              <Input
+                placeholder="Telefone"
+                style={inputStyle}
+                name="phone"
+                required
+              />
+            )}
+          </InputMask>
 
           <button style={buttonStyle} type="submit">
             Salvar

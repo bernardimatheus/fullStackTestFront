@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 
 import Modal from 'react-modal';
 
+import { toast } from 'react-toastify';
+
+import InputMask from 'react-input-mask';
+
 import { Form, Input } from '@rocketseat/unform';
 import { Container, AddButton, ButtonDiv } from './styles';
 import add from '../../assets/images/add.svg';
@@ -42,6 +46,12 @@ const buttonStyle = {
 
 Modal.setAppElement('#root');
 
+toast.configure({
+  autoClose: 3000,
+  draggable: false,
+  // etc you get the idea
+});
+
 export default function AddModal({ handleAdd }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -59,6 +69,7 @@ export default function AddModal({ handleAdd }) {
     }
     api.post(`${process.env.REACT_APP_DEV_API_URL}/clients`, data).then(res => {
       if (res.status === 200) {
+        toast.success('Cliente cadastrado!');
         handleAdd(res.data);
       }
     });
@@ -90,10 +101,28 @@ export default function AddModal({ handleAdd }) {
           }}
           onSubmit={handleSubmit}
         >
-          <Input placeholder="Nome" style={inputStyle} name="name" />
-          <Input placeholder="CPF" style={inputStyle} name="cpf" />
-          <Input placeholder="E-mail" style={inputStyle} name="email" />
-          <Input placeholder="Telefone" style={inputStyle} name="phone" />
+          <Input placeholder="Nome" required style={inputStyle} name="name" />
+          <InputMask mask="999.999.999-99">
+            {() => (
+              <Input placeholder="CPF" style={inputStyle} name="cpf" required />
+            )}
+          </InputMask>
+          <Input
+            placeholder="E-mail"
+            required
+            style={inputStyle}
+            name="email"
+          />
+          <InputMask mask="(99) 9 9999-9999">
+            {() => (
+              <Input
+                placeholder="Telefone"
+                style={inputStyle}
+                name="phone"
+                required
+              />
+            )}
+          </InputMask>
 
           <button style={buttonStyle} type="submit">
             Adicionar
