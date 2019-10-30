@@ -5,9 +5,10 @@ import './react-table.css';
 
 import api from '../../services/api';
 
-import { Container, Content } from './styles';
+import { Container, Content, ActionDiv } from './styles';
 
 import AddModal from '../../components/AddModal';
+import EditModal from '../../components/EditModal';
 
 export default function ListClient() {
   const [clients, setClients] = useState([]);
@@ -18,10 +19,6 @@ export default function ListClient() {
       setClientData(res.data);
     });
   }, [clients]);
-
-  function handleEdit(clientInfo) {
-    console.log(clientInfo);
-  }
 
   function handleDelete(clientInfo) {
     api
@@ -34,7 +31,16 @@ export default function ListClient() {
   }
 
   function handleAdd(listData) {
+    if (!listData) {
+      return;
+    }
     setClients(prevState => [{ ...prevState, listData }]);
+  }
+
+  function handleEdit() {
+    api.get(`${process.env.REACT_APP_DEV_API_URL}/clients`).then(res => {
+      setClientData(res.data);
+    });
   }
 
   const columns = [
@@ -61,14 +67,12 @@ export default function ListClient() {
     {
       Header: 'Ações',
       Cell: row => (
-        <div>
-          <button type="button" onClick={() => handleEdit(row.original)}>
-            Edit
-          </button>
+        <ActionDiv>
+          <EditModal handleEdit={handleEdit} data={row.original} />
           <button type="button" onClick={() => handleDelete(row.original)}>
             Delete
           </button>
-        </div>
+        </ActionDiv>
       ),
     },
   ];

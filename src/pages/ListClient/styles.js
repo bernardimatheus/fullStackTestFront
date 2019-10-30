@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   display: flex;
@@ -24,4 +25,25 @@ export const Content = styled.div`
   margin: 20px;
   padding: 15px;
   width: 100%;
+`;
+
+export const ActionDiv = styled.div`
+  display: flex;
+  justify-content: center;
+
+  button {
+    background: #82ebb3;
+    border-radius: 4px;
+    padding: 5px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    margin: 0px 5px;
+    transition: background 0.1s;
+    &:hover {
+      background: ${darken('0.09', '#82ebb3')};
+    }
+  }
 `;
