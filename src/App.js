@@ -7,18 +7,14 @@ import history from './services/history';
 
 import GlobalStyle from './styles/global';
 
-import store from './store';
-
 require('dotenv').config();
 
 function App() {
   return (
-    <Provider store={store}>
-      <Router history={history}>
-        <Routes />
-        <GlobalStyle />
-      </Router>
-    </Provider>
+    <Router history={history}>
+      <Routes />
+      <GlobalStyle />
+    </Router>
   );
 }
 
