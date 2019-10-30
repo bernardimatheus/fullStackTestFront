@@ -73,6 +73,11 @@ export default function EditModal({ data, handleEdit }) {
           toast.success('Cliente editado!');
           handleEdit();
         }
+      })
+      .catch(error => {
+        if (error.response.status === 400) {
+          toast.error('Dados existentes');
+        }
       });
   }
 

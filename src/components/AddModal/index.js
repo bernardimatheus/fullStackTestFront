@@ -68,12 +68,19 @@ export default function AddModal({ handleAdd }) {
     if (!data.name || !data.email || !data.phone || !data.cpf) {
       return;
     }
-    api.post(`${process.env.REACT_APP_DEV_API_URL}/clients`, data).then(res => {
-      if (res.status === 200) {
-        toast.success('Cliente cadastrado!');
-        handleAdd(res.data);
-      }
-    });
+    api
+      .post(`${process.env.REACT_APP_DEV_API_URL}/clients`, data)
+      .then(res => {
+        if (res.status === 200) {
+          toast.success('Cliente cadastrado!');
+          handleAdd(res.data);
+        }
+      })
+      .catch(error => {
+        if (error.response.status === 400) {
+          toast.error('Dados existentes');
+        }
+      });
   }
 
   return (
