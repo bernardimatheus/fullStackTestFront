@@ -3,12 +3,20 @@ import React, { useState, useEffect } from 'react';
 import ReactTable from 'react-table';
 import './react-table.css';
 
+import { toast } from 'react-toastify';
+
 import api from '../../services/api';
 
 import { Container, Content, ActionDiv } from './styles';
 
 import AddModal from '../../components/AddModal';
 import EditModal from '../../components/EditModal';
+
+toast.configure({
+  autoClose: 3000,
+  draggable: false,
+  // etc you get the idea
+});
 
 export default function ListClient() {
   const [clients, setClients] = useState([]);
@@ -26,6 +34,7 @@ export default function ListClient() {
       .then(res => {
         if (res.status === 200) {
           setClients(clients.filter(item => item.id !== clientInfo.id));
+          toast.success('Deletado com sucesso!');
         }
       });
   }
